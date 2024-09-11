@@ -1,0 +1,180 @@
+---
+title: "Submission 1"
+author: "Raquel Luna"
+editor: visual
+format:
+    revealjs:
+      theme: "simple"
+      transition: fade
+      slide-number: true
+      progress: true
+      scrollable: true
+---
+
+1. Data Visualization
+- Objective: Identify data or model problems using visualization. 
+
+```{r}
+# Load Anscombe's data
+data(anscombe)
+summary(anscombe)
+```
+
+```{r}
+# Simple version: plotting and fitting the first linear model
+plot(anscombe$x1, anscombe$y1, main="Dataset 1")
+lm1 <- lm(y1 ~ x1, data=anscombe)
+abline(lm1, col="blue")
+summary(lm1)
+```
+
+```{r}
+# Fitting models for all four data sets
+lm1 <- lm(y1 ~ x1, data=anscombe)
+summary(lm1)
+lm2 <- lm(y2 ~ x2, data=anscombe)
+summary(lm2)
+lm3 <- lm(y3 ~ x3, data=anscombe)
+summary(lm3)
+lm4 <- lm(y4 ~ x4, data=anscombe)
+summary(lm4)
+plot(anscombe$x1,anscombe$y1)
+abline(coefficients(lm1))
+plot(anscombe$x2,anscombe$y2)
+abline(coefficients(lm2))
+plot(anscombe$x3,anscombe$y3)
+abline(coefficients(lm3))
+plot(anscombe$x4,anscombe$y4)
+abline(coefficients(lm4))
+```
+```{r, echo=FALSE}
+summary(anscombe)
+```
+```{r}
+# Initialize formula and model storage
+ff <- y ~ x
+mods <- setNames(as.list(1:4), paste0("lm", 1:4))
+
+# Fit models using a for loop and print ANOVA results
+for(i in 1:4) {
+  ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
+  mods[[i]] <- lmi <- lm(ff, data = anscombe)
+  print(anova(lmi))
+}
+
+# Display coefficients from models
+sapply(mods, coef)  # Extract coefficients
+lapply(mods, function(fm) coef(summary(fm)))  # Detailed model summaries
+
+```
+
+```{r}
+# Set up plotting parameters
+op <- par(mfrow = c(2, 2), mar = 0.1 + c(4, 4, 1, 1), oma = c(0, 0, 2, 0))
+
+# Plot all four datasets with regression lines using a for loop
+for(i in 1:4) {
+  ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
+  plot(ff, data = anscombe, col = "red", pch = 21, bg = "orange", cex = 1.2,
+       xlim = c(3, 19), ylim = c(3, 13))
+  abline(mods[[i]], col = "blue")
+}
+
+# Add an outer title for all plots
+mtext("Anscombe's 4 Regression Data Sets (Fancy Version)", outer = TRUE, cex = 1.5)
+
+# Reset plotting parameters
+par(op)
+```
+
+---
+
+2. Google "Generative Art". Cite some examples.
+
+![Chandra Michelle, 2019. *Endless Forms Most Beautiful - Generative Spirograph Prints*. https://www.michellechandra.com/generative-design-2/generative-art-spirograph-prints/](https://www.michellechandra.com/wp-content/uploads/2019/11/large_black_pincushion.jpg)
+
+![Manolo Gamboa Naon, https://aiartists.org/generative-art-design](https://images.squarespace-cdn.com/content/v1/5c77350965a707ed1710a1bc/1592324984483-YGAI488E2HV60HX424FZ/Generative+Art+by+Manolo+Gamboa+Naon.jpeg?format=2500w)
+
+---
+
+3. Fall
+- Objective: Create Graphics with R
+```{r}
+library(gsubfn)
+library(tidyverse)
+```{r}
+# Define parameters for L-system
+axiom = "X"
+rules = list("X" = "F-[[X]+X]+F[+FX]-X", "F" = "FF")
+angle = 22.5
+depth = 6
+
+# Apply rules for L-system
+for (i in 1:depth) {
+  axiom = gsubfn(".", rules, axiom)
+}
+
+# Extract actions from the axiom
+actions = str_extract_all(axiom, "\\d*\\+|\\d*\\-|F|L|R|\\[|\\]|\\|") %>% unlist
+
+# Initialize the status and points data frames
+status = data.frame(x = numeric(0), y = numeric(0), alfa = numeric(0))
+points = data.frame(x1 = 0, y1 = 0, x2 = NA, y2 = NA, alfa = 90, depth = 1)
+
+# Loop through the actions to generate points
+for (action in actions) {
+  if (action == "F") {
+    # Calculate new coordinates for 'F'
+    x = points[1, "x1"] + cos(points[1, "alfa"] * (pi / 180))
+    y = points[1, "y1"] + sin(points[1, "alfa"] * (pi / 180))
+    
+    # Update the points data frame with new segment
+    points[1, "x2"] = x
+    points[1, "y2"] = y
+    points = rbind(data.frame(x1 = x, y1 = y, x2 = NA, y2 = NA, 
+                              alfa = points[1, "alfa"], depth = points[1, "depth"]),
+                   points)
+  }
+  
+  # Adjust angle for '+' and '-'
+  if (action %in% c("+", "-")) {
+    alfa = points[1, "alfa"]
+    points[1, "alfa"] = eval(parse(text = paste0("alfa", action, angle)))
+  }
+  
+  # Push current position to stack for '['
+  if (action == "[") {
+    status = rbind(data.frame(x = points[1, "x1"], y = points[1, "y1"], 
+                              alfa = points[1, "alfa"]), status)
+    points[1, "depth"] = points[1, "depth"] + 1
+  }
+  
+  # Pop position from stack for ']'
+  if (action == "]") {
+    depth = points[1, "depth"]
+    points = points[-1,]
+    points = rbind(data.frame(x1 = status[1, "x"], y1 = status[1, "y"], x2 = NA, 
+                              y2 = NA, alfa = status[1, "alfa"], depth = depth - 1),
+                   points)
+    status = status[-1,]
+  }
+}
+
+# Plot the generated points using ggplot2
+ggplot() +
+  geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2), 
+               lineend = "round", 
+               color = "cyan3",  # Fall color for the branches
+               data = na.omit(points)) +  # Remove any incomplete points
+  coord_fixed(ratio = 1) +  # Keep the aspect ratio
+  theme_void()  # Remove background and axes
+ 
+
+
+```
+---
+
+4. Chart Critique
+![Chart](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/354bfb83-1d1c-424f-a3c9-aa91d7a2bed8/d9jn6vn-3400d285-1a27-49de-a12c-721bf829e314.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM1NGJmYjgzLTFkMWMtNDI0Zi1hM2M5LWFhOTFkN2EyYmVkOFwvZDlqbjZ2bi0zNDAwZDI4NS0xYTI3LTQ5ZGUtYTEyYy03MjFiZjgyOWUzMTQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6yulsTbPALsTOlX_FqF4PrqV9uoqZqLo6OpLzWWKt4U)
+
+^[The chart titled "What English do you Speak" presents the user's linguistic accent profile, with "American" being the predominant result at 85%, followed by accents like Canadian (78%), Australian (61%), British (55%), New Zealand (54%), and South African (45%). The horizontal bars effectively display the relative strength of each accent, making it easy to visually compare the different results. The description for the American accent adds a humorous and engaging touch, referencing regional dialects like "No'th Ca'lina" and "New Yawk," which adds a lighthearted tone to the quiz’s outcome and makes it more relatable to an American audience.However, the chart lacks detail regarding the methodology behind these results. It doesn’t explain how the percentages were calculated, leaving the reader without an understanding of what criteria were used to determine the accent breakdown. Additionally, there seems to be a strong bias towards American English, both in the dominant percentage and the tone of the accompanying text. The focus on American regional dialects, while entertaining, might make the quiz less relevant to users from non-American English-speaking backgrounds. Moreover, the detailed description is only provided for the American accent, while other accents, such as Canadian or Australian, are not given any context or explanation. Offering descriptions for the other accent results and more information about how the results were derived would provide a more comprehensive and balanced experience for users.]

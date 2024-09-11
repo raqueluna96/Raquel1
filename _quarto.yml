@@ -1,0 +1,31 @@
+project:
+  type: website
+
+website:
+  title: "rluna"
+  navbar:
+    background: info
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: sub1.qmd
+        text: Homework 1
+      - href: sub2.qmd
+        text: Homework 2
+    right: 
+      - icon: github
+        href: https://raqueluna96.github.io/Raquel1/
+  sidebar: 
+    style: "docked"
+    search: true
+
+format:
+  html:
+    theme: minty
+    css: styles.css
+    toc: true
+
+editor: visual
+

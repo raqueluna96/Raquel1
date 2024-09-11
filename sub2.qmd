@@ -1,0 +1,20 @@
+---
+title: "Submission 2"
+author: Raquel Luna
+editor: visual
+format:
+    revealjs:
+      theme: 'simple'
+      transition: fade
+      slide-number: true
+      progress: true
+      scrollable: true
+---
+
+# Data Visualization
+
+-   Objective: Create Graphics with R
+-   Title: Fall Color
+---
+# Define elements in plant art
+# Each 
