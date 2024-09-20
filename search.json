@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "sub2.html",
-    "href": "sub2.html",
-    "title": "Assignment 2",
-    "section": "",
-    "text": "Data Visualization\n\nObjective: Create Graphics with R\nTitle: Fall Color\n\n\n\n\nDefine elements in plant art\n\n\nEach"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\nI’m Raquel Luna and I am currently pursuing on my Masters of Science in Social Data Analytics and Research at UT Dallas. This website is intended to showcase the work I have done in my “Data Visualization Course”."
-  },
-  {
     "objectID": "sub1.html",
     "href": "sub1.html",
     "title": "Assignment 1",
@@ -47,5 +33,19 @@
     "title": "Assignment 1",
     "section": "4. Chart Critique",
     "text": "4. Chart Critique\n\n\n\nChart\n\n\nThe chart titled “What English do you Speak” presents the user’s linguistic accent profile, with “American” being the predominant result at 85%, followed by accents like Canadian (78%), Australian (61%), British (55%), New Zealand (54%), and South African (45%). The horizontal bars effectively display the relative strength of each accent, making it easy to visually compare the different results. The description for the American accent adds a humorous and engaging touch, referencing regional dialects like “No’th Ca’lina” and “New Yawk,” which adds a lighthearted tone to the quiz’s outcome and makes it more relatable to an American audience.However, the chart lacks detail regarding the methodology behind these results. It doesn’t explain how the percentages were calculated, leaving the reader without an understanding of what criteria were used to determine the accent breakdown. Additionally, there seems to be a strong bias towards American English, both in the dominant percentage and the tone of the accompanying text. The focus on American regional dialects, while entertaining, might make the quiz less relevant to users from non-American English-speaking backgrounds. Moreover, the detailed description is only provided for the American accent, while other accents, such as Canadian or Australian, are not given any context or explanation. Offering descriptions for the other accent results and more information about how the results were derived would provide a more comprehensive and balanced experience for users."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\nI’m Raquel Luna and I am currently pursuing my Masters of Science in Social Data Analytics and Research at UT Dallas. This website is intended to showcase the work I have done in my “Data Visualization Course”."
+  },
+  {
+    "objectID": "sub2.html",
+    "href": "sub2.html",
+    "title": "Assignment 2",
+    "section": "",
+    "text": "Data Visualization\n\nObjective: Create Graphics with R\nTitle: Fall Color\n\n\n\n\nDefine elements in plant art\n\n\nEach"
   }
 ]
