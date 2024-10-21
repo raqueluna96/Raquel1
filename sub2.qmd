@@ -1,20 +1,43 @@
 ---
-title: "Submission 2"
+title: "Assignment 2"
 author: Raquel Luna
 editor: visual
 format:
-    revealjs:
-      theme: 'simple'
-      transition: fade
-      slide-number: true
-      progress: true
-      scrollable: true
+  html:
+    page-layout: article
+    progress: true
+    scrollable: true
 ---
 
-# Data Visualization
+## 1. Run Paul Murell's RGraphics basic R programs
+```{r,echo=FALSE,results='hide', warning=FALSE, message=FALSE}
+library(readxl)
+# Load the dataset from the new path
+HPI_2024_public_dataset <- read_excel("C:\\Users\\raque\\OneDrive\\Documents\\rluna\\HPI_2024_public_dataset.xlsx", sheet = "All Data", skip = 1)
 
--   Objective: Create Graphics with R
--   Title: Fall Color
----
-# Define elements in plant art
-# Each 
+# Display the first few rows
+head(HPI_2024_public_dataset)
+
+colnames(HPI_2024_public_dataset)
+# Extract relevant columns (Country, Year, and Life Expectancy)
+hpi_clean <- HPI_2024_public_dataset[!is.na(HPI_2024_public_dataset$LifeExp), 
+                                     c("Country", "Year", "LifeExp")]
+#Group by year and calculate the mean life expectancy
+avg_life_expectancy <- aggregate(LifeExp ~ Year, data=hpi_clean, FUN=mean)
+
+par(mfrow=c(1, 1)) # Single plot
+plot(avg_life_expectancy$Year, avg_life_expectancy$LifeExp, type="o", col="blue",
+     main="Global Average Life Expectancy Over Time", xlab="Year", ylab="Life Expectancy (Years)", pch=16)
+
+# Add lines and points
+lines(avg_life_expectancy$Year, avg_life_expectancy$LifeExp, col="blue")
+points(avg_life_expectancy$Year, avg_life_expectancy$LifeExp, pch=16, col="blue")
+
+axis(1) # X-axis
+axis(2) # Y-axis
+box()   # Add a box around the plot
+
+mtext("Source: Happy Planet Index", side=3, line=-1, cex=0.7)
+```
+
+
