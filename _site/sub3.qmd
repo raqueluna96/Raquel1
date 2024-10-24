@@ -1,5 +1,5 @@
 ---
-title: "Assignment 1"
+title: "Assignment 3"
 author: "Raquel Luna"
 editor: visual
 format:
@@ -10,6 +10,7 @@ format:
 ---
 
 ## 1 Rerun anscombe01.R
+
 ```{r, echo=FALSE}
 # Load the built-in Anscombe dataset
 data(anscombe)
@@ -47,17 +48,15 @@ plot(anscombe$x4, anscombe$y4, main="Anscombe Dataset 4",
      xlab="X4", ylab="Y4", col="blue", pch=19)
 abline(lm4, col="red", lwd=2)  # Add regression line
 ```
----
+
+------------------------------------------------------------------------
 
 ## Comparing Regression Models
-Anscombe’s Quartet consists of four datasets that have nearly identical summary statistics—mean, variance, correlation, and regression line slope—yet exhibit very different distributions and visual patterns. By fitting a linear regression model to each dataset (lm(y ~ x)), we can examine how these similarities hold across the datasets, despite their differing behaviors when plotted.
 
-Key Observations from Regression Summaries:
-Similar regression coefficients: Each dataset shows very similar regression coefficients for the intercept and slope, confirming that the regression lines are statistically similar.
-For instance, the slope of the regression lines across all four datasets hovers around the same value (close to 0.5), and the intercepts remain near 3.
-Identical R-squared values: The R-squared values, which represent how well the model fits the data, are nearly identical across the four datasets. This means that, in terms of variance explained by the linear model, the datasets appear similar.
-Despite these statistical similarities, the underlying data in each dataset is quite different, which becomes apparent only through plotting.
----
+Anscombe’s Quartet consists of four datasets that have nearly identical summary statistics—mean, variance, correlation, and regression line slope—yet exhibit very different distributions and visual patterns. By fitting a linear regression model to each dataset (lm(y \~ x)), we can examine how these similarities hold across the datasets, despite their differing behaviors when plotted.
+
+Key Observations from Regression Summaries: Similar regression coefficients: Each dataset shows very similar regression coefficients for the intercept and slope, confirming that the regression lines are statistically similar. For instance, the slope of the regression lines across all four datasets hovers around the same value (close to 0.5), and the intercepts remain near 3. Identical R-squared values: The R-squared values, which represent how well the model fits the data, are nearly identical across the four datasets. This means that, in terms of variance explained by the linear model, the datasets appear similar. Despite these statistical similarities, the underlying data in each dataset is quite different, which becomes apparent only through plotting. ---
+
 ```{r, echo=FALSE}
 # Load the built-in Anscombe dataset
 data(anscombe)
@@ -99,8 +98,9 @@ plot(anscombe$x4, anscombe$y4, main="Anscombe Dataset 4",
      xlab="X4", ylab="Y4", col="purple", pch=17)
 abline(lm4, col="hotpink", lwd=2)  # Add regression line
 ```
----
+
+------------------------------------------------------------------------
 
 ## Finetuning the charts
-I decided to explore with some different PCH, font and colors for the charts. I tried not using default colors and use my own plotting characters for experimintation, until I can find my own style.
----
+
+## I decided to explore with some different PCH, font and colors for the charts. I tried not using default colors and use my own plotting characters for experimintation, until I can find my own style.
