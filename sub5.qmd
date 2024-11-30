@@ -1,0 +1,245 @@
+---
+title: "Assignment 5"
+author: "Raquel Luna"
+editor: visual
+format:
+  html:
+    page-layout: article
+    progress: true
+    scrollable: true
+---
+
+## Histogram
+
+```{r, echo=FALSE,warning=FALSE}
+# Load the dataset
+cost.of.living <- read.csv("cost-of-living.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract the row for "Fitness Club, Monthly Fee for 1 Adult" (row 30)
+fitness_fees <- cost.of.living[30, ]
+
+# Add city names from the dataset column headers
+colnames(fitness_fees) <- colnames(cost.of.living)
+
+# Select specific cities based on their exact names
+selected_cities <- c("Houston..TX..United.States", 
+                     "Dallas..TX..United.States", 
+                     "Austin..TX..United.States")
+selected_data <- data.frame(City = selected_cities,
+                            Fitness_Fee = as.numeric(fitness_fees[, selected_cities]))
+
+# Check if the Fitness_Fee column has valid numeric values
+if (all(is.na(selected_data$Fitness_Fee))) {
+  stop("No valid numeric data found for Fitness_Fee. Check the dataset.")
+}
+
+# Create the histogram
+hist(selected_data$Fitness_Fee,
+     breaks = 5,                     # Number of bins
+     col = "lightblue",              # Fill color
+     main = "Histogram of Fitness Club Fees", # Title
+     xlab = "Monthly Fee (USD)",     # X-axis label
+     ylab = "Frequency")             # Y-axis label
+
+# Optional: Add a mean line
+abline(v = mean(selected_data$Fitness_Fee, na.rm = TRUE), 
+       col = "red", lwd = 2, lty = 2) # Red dashed line
+text(mean(selected_data$Fitness_Fee, na.rm = TRUE), 
+     par("usr")[4] * 0.8, 
+     labels = paste("Mean:", round(mean(selected_data$Fitness_Fee, na.rm = TRUE), 2)), 
+     col = "red", pos = 4)
+```
+
+## Barchart (Horizontal)
+
+```{r,echo=FALSE, warning=FALSE}
+# Load the dataset
+cost.of.living <- read.csv("cost-of-living.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract the row for "Fitness Club, Monthly Fee for 1 Adult" (row 30)
+fitness_fees <- cost.of.living[30, ]
+
+# Ensure column names are correctly assigned
+colnames(fitness_fees) <- colnames(cost.of.living)
+
+# Select the specific cities
+selected_cities <- c("Houston..TX..United.States", 
+                     "Dallas..TX..United.States", 
+                     "Austin..TX..United.States")
+
+# Extract the fitness fee data for the selected cities
+selected_data <- data.frame(City = selected_cities,
+                            Fitness_Fee = as.numeric(fitness_fees[selected_cities]))
+
+# Validate the extracted data
+print(selected_data)
+
+# Check if the Fitness_Fee column has valid numeric values
+if (all(is.na(selected_data$Fitness_Fee))) {
+  stop("No valid numeric data found for Fitness_Fee. Check the dataset.")
+}
+
+# Create the horizontal bar chart
+barplot(selected_data$Fitness_Fee,
+        names.arg = selected_data$City,  # City names as labels
+        horiz = TRUE,                    # Horizontal bars
+        col = "skyblue",                 # Bar color
+        main = "Fitness Club Monthly Fees",  # Title
+        xlab = "Monthly Fee (USD)",      # X-axis label
+        las = 1)                         # Rotate axis labels for readability
+
+# Optional: Add the fee values at the end of each bar
+text(selected_data$Fitness_Fee, 
+     seq_along(selected_data$Fitness_Fee), 
+     labels = round(selected_data$Fitness_Fee, 2), 
+     pos = 4)  # Position the text to the right of the bars
+```
+
+## Pie Chart
+
+```{r, echo=FALSE,warning=FALSE}
+# Load the dataset
+cost.of.living <- read.csv("cost-of-living.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract the row for "Fitness Club, Monthly Fee for 1 Adult" (row 30)
+fitness_fees <- cost.of.living[30, ]
+
+# Ensure column names are correctly assigned
+colnames(fitness_fees) <- colnames(cost.of.living)
+
+# Select the specific cities
+selected_cities <- c("Houston..TX..United.States", 
+                     "Dallas..TX..United.States", 
+                     "Austin..TX..United.States")
+
+# Extract the fitness fee data for the selected cities
+selected_data <- data.frame(City = selected_cities,
+                            Fitness_Fee = as.numeric(fitness_fees[selected_cities]))
+
+# Validate the extracted data
+print(selected_data)
+
+# Check if the Fitness_Fee column has valid numeric values
+if (all(is.na(selected_data$Fitness_Fee))) {
+  stop("No valid numeric data found for Fitness_Fee. Check the dataset.")
+}
+
+# Create the pie chart
+pie(selected_data$Fitness_Fee,
+    labels = selected_data$City,       # City names as labels
+    main = "Fitness Club Monthly Fees", # Title
+    col = c("skyblue", "orange", "lightgreen")) # Custom colors for the pie slices
+
+# Optional: Add percentages to the pie chart
+percentages <- round(selected_data$Fitness_Fee / sum(selected_data$Fitness_Fee) * 100, 1)
+pie(selected_data$Fitness_Fee,
+    labels = paste(selected_data$City, "(", percentages, "%)", sep = ""),
+    main = "Fitness Club Monthly Fees with Percentages",
+    col = c("skyblue", "orange", "lightgreen"))
+```
+
+## Boxplot
+
+```{r, echo=FALSE, warning=FALSE}
+# Load the dataset
+cost.of.living <- read.csv("cost-of-living.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract the row for "Fitness Club, Monthly Fee for 1 Adult" (row 30)
+fitness_fees <- cost.of.living[30, ]
+
+# Ensure column names are correctly assigned
+colnames(fitness_fees) <- colnames(cost.of.living)
+
+# Select the specific cities
+selected_cities <- c("Houston..TX..United.States", 
+                     "Dallas..TX..United.States", 
+                     "Austin..TX..United.States")
+
+# Extract the fitness fee data for the selected cities
+selected_data <- data.frame(City = selected_cities,
+                            Fitness_Fee = as.numeric(fitness_fees[selected_cities]))
+
+# Debugging: Ensure all selected cities are included
+print(selected_data)
+
+# Handle missing values
+if (any(is.na(selected_data$Fitness_Fee))) {
+  print("Warning: Missing or invalid data for one or more cities.")
+  print(selected_data)
+  
+  # Replace missing values with a placeholder or manually update them
+  selected_data$Fitness_Fee[is.na(selected_data$Fitness_Fee)] <- 0 # Replace with 0 or actual values
+}
+
+# Create the boxplot
+boxplot(selected_data$Fitness_Fee ~ selected_data$City,
+        main = "Boxplot of Fitness Club Monthly Fees",  # Title
+        xlab = "City",                                  # X-axis label
+        ylab = "Monthly Fee (USD)",                    # Y-axis label
+        col = "lightblue",                             # Box color
+        las = 1)                                       # Rotate axis labels for readability
+
+# Optional: Add means as points to the boxplot
+means <- tapply(selected_data$Fitness_Fee, selected_data$City, mean)
+points(1:length(means), means, col = "red", pch = 19) # Red dots for means
+
+```
+
+## Scatterplot
+
+```{r, echo=FALSE,warning=FALSE}
+
+# Load the dataset
+cost.of.living <- read.csv("cost-of-living.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract the row for "Fitness Club, Monthly Fee for 1 Adult" (row 30)
+fitness_fees <- cost.of.living[30, ]
+
+# Ensure column names are correctly assigned
+colnames(fitness_fees) <- colnames(cost.of.living)
+
+# Select the specific cities
+selected_cities <- c("Houston..TX..United.States", 
+                     "Dallas..TX..United.States", 
+                     "Austin..TX..United.States")
+
+# Extract the fitness fee data for the selected cities
+selected_data <- data.frame(City = selected_cities,
+                            Fitness_Fee = as.numeric(fitness_fees[selected_cities]))
+
+# Debugging: Ensure all selected cities are included
+print(selected_data)
+
+# Handle missing or invalid data
+if (any(is.na(selected_data$Fitness_Fee) | !is.finite(selected_data$Fitness_Fee))) {
+  print("Warning: Missing or invalid data for one or more cities.")
+  print(selected_data)
+  
+  # Replace invalid values with 0 or another placeholder
+  selected_data$Fitness_Fee[is.na(selected_data$Fitness_Fee) | !is.finite(selected_data$Fitness_Fee)] <- 0
+}
+
+# Clean up city names for better labels
+selected_data$City <- gsub("\\.\\.", " ", selected_data$City)  # Replace ".." with spaces
+selected_data$City <- gsub(" United States", "", selected_data$City)  # Remove "United States"
+
+# Create a scatterplot
+plot(seq_along(selected_data$City), selected_data$Fitness_Fee,
+     main = "Scatterplot of Fitness Club Monthly Fees",  # Title
+     xlab = "City",                                       # X-axis label
+     ylab = "Monthly Fee (USD)",                         # Y-axis label
+     xaxt = "n",                                         # Suppress x-axis labels
+     pch = 19,                                           # Point character (solid circle)
+     col = "blue",                                       # Point color
+     cex = 1.5)                                          # Point size
+
+# Add cleaned city names (City and State only) to the x-axis
+axis(1, at = seq_along(selected_data$City), labels = selected_data$City, las = 1)
+
+# Optional: Add text labels to points
+text(x = seq_along(selected_data$City), 
+     y = selected_data$Fitness_Fee, 
+     labels = round(selected_data$Fitness_Fee, 2), 
+     pos = 3, cex = 0.8, col = "red")  # Position labels above points
+
+```
