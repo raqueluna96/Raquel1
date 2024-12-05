@@ -27,9 +27,9 @@ website:
           - href: rev1.qmd
             text: "Edward Tufte (2016) The Future of Data Analysis Review"
       - text: "Final Projects"
-      menu:
-        - href: files/EPPS%206356%20Final%20Project.pdf
-          text: "EPPS 6356 Final (PDF)"
+        menu:
+          - href: files/EPPS%206356%20Final%20Project.pdf
+            text: "EPPS 6356 Final (PDF)"
         
     right: 
       - icon: github
