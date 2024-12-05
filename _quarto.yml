@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "rluna"
+  title: "Raquel Luna"
   navbar:
     background: info
     left:
@@ -10,10 +10,27 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: sub1.qmd
-        text: Homework 1
-      - href: sub2.qmd
-        text: Homework 2
+      - text: "Assignments"
+        menu:
+          - href: sub1.qmd
+            text: "Assignment 1"
+          - href: sub2.qmd
+            text: "Assignment 2"
+          - href: sub3.qmd
+            text: "Assignment 3"
+          - href: sub4.qmd
+            text: "Assignment 4"
+          - href: sub5.qmd
+            text: "Assignment 5"
+      - text: "Reviews"
+        menu: 
+          - href: rev1.qmd
+            text: "Edward Tufte (2016) The Future of Data Analysis Review"
+      - text: "Final Projects"
+      menu:
+        - href: files/presentation.pptx
+          text: "EPPS 6356 Final"
+        
     right: 
       - icon: github
         href: https://raqueluna96.github.io/Raquel1/
@@ -23,8 +40,12 @@ website:
 
 format:
   html:
+    grid: 
+      sidebar-width: 300px
+      body-width: 650px
+      margin-width: 450px
     theme: minty
-    css: styles.css
+    css: custom.css
     toc: true
 
 editor: visual
