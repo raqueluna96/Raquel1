@@ -4,7 +4,7 @@ title: "About"
 
 About this site
 
-Created to showcase all assignments in 'Data Visualization' course.
+I'm Raquel Luna and I am currently pursuing my Masters of Science in Social Data Analytics and Research at UT Dallas. This website is intended to showcase the work I have done in my "Data Visualization Course".
 
 ```         
 ```
