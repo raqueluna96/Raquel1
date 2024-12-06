@@ -30,6 +30,8 @@ website:
             
       - text: "Final Projects"
         menu:
+          - href: files/EPPS6356FinalProject.pdf
+            text: "Final Project PDF"
           
         
     right: 
