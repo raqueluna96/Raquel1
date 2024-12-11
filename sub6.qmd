@@ -1,10 +1,11 @@
 ---
-title: "Assignment 6"
-author: "Raquel Luna"
-editor: visual
-format:
-  html:
-    page-layout: article
-    progress: true
-    scrollable: true
+title: "Final Project"
 ---
+
+Here is the link to the Final Project pdf.
+
+[Link to PDF](.C:\Users\raque\OneDrive\Documents\rluna_site\files\EPPS6356FinalProject,pdf)
+
+## Shiny App
+
+<https://malashiny.shinyapps.io/test-1/>
