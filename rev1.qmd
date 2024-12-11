@@ -1,6 +1,6 @@
 ---
 title: "Edward Tufte's *The Future of Data Analysis* Review" 
-author: "Raquel Luna"
+author: Raquel Luna
 editor: visual
 format:
   html:
@@ -8,6 +8,7 @@ format:
     progress: true
     scrollable: true
 ---
+
 ## Review and Reflection on the Video: "The Future of Data Analysis" by Dr. Edward Tufte
 
 In the keynote session of the Microsoft Machine Learning & Data Science Summit 2016, Dr. Edward Tufte presented on *“The Future of Data Analysis.”* Dr. Tufte emphasized that data analysis is about “turning information into conclusions,” while analytical thinking involves “assessing and evaluating the relationship between information and conclusions.” The goal of data visualization, according to him, is to “assist reasoning about its content.” This suggests that data visualization should help in illustrating the connections between “information and conclusions,” such as demonstrating causal mechanisms or models that aim to describe, explain, and predict observed phenomena.

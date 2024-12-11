@@ -1,0 +1,10 @@
+---
+title: "Assignment 6"
+author: "Raquel Luna"
+editor: visual
+format:
+  html:
+    page-layout: article
+    progress: true
+    scrollable: true
+---

@@ -1,35 +1,31 @@
 ---
-title: "Submission 1"
+title: "Assignment 1"
 author: "Raquel Luna"
 editor: visual
 format:
-    revealjs:
-      theme: "simple"
-      transition: fade
-      slide-number: true
-      progress: true
-      scrollable: true
+  html:
+    page-layout: article
+    progress: true
+    scrollable: true
 ---
 
-1. Data Visualization
-- Objective: Identify data or model problems using visualization. 
+## 1. Data Visualization
 
-```{r}
-# Load Anscombe's data
-data(anscombe)
-summary(anscombe)
-```
+-   Objective: Identify data or model problems using visualization.
 
-```{r}
-# Simple version: plotting and fitting the first linear model
+```{r, echo=FALSE}
 plot(anscombe$x1, anscombe$y1, main="Dataset 1")
 lm1 <- lm(y1 ~ x1, data=anscombe)
 abline(lm1, col="blue")
 summary(lm1)
+data(anscombe)
+View(anscombe) 
+summary(anscombe)
+plot(anscombe$x1,anscombe$y1)
+summary(anscombe)
 ```
 
-```{r}
-# Fitting models for all four data sets
+```{r, echo=FALSE}
 lm1 <- lm(y1 ~ x1, data=anscombe)
 summary(lm1)
 lm2 <- lm(y2 ~ x2, data=anscombe)
@@ -47,32 +43,29 @@ abline(coefficients(lm3))
 plot(anscombe$x4,anscombe$y4)
 abline(coefficients(lm4))
 ```
+
 ```{r, echo=FALSE}
 summary(anscombe)
 ```
-```{r}
-# Initialize formula and model storage
+
+```{r, echo=FALSE}
 ff <- y ~ x
 mods <- setNames(as.list(1:4), paste0("lm", 1:4))
 
-# Fit models using a for loop and print ANOVA results
 for(i in 1:4) {
   ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
   mods[[i]] <- lmi <- lm(ff, data = anscombe)
   print(anova(lmi))
 }
 
-# Display coefficients from models
-sapply(mods, coef)  # Extract coefficients
-lapply(mods, function(fm) coef(summary(fm)))  # Detailed model summaries
+sapply(mods, coef)  
+lapply(mods, function(fm) coef(summary(fm)))
 
 ```
 
-```{r}
-# Set up plotting parameters
+```{r, echo=FALSE}
 op <- par(mfrow = c(2, 2), mar = 0.1 + c(4, 4, 1, 1), oma = c(0, 0, 2, 0))
 
-# Plot all four datasets with regression lines using a for loop
 for(i in 1:4) {
   ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
   plot(ff, data = anscombe, col = "red", pch = 21, bg = "orange", cex = 1.2,
@@ -87,22 +80,24 @@ mtext("Anscombe's 4 Regression Data Sets (Fancy Version)", outer = TRUE, cex = 1
 par(op)
 ```
 
----
+------------------------------------------------------------------------
 
-2. Google "Generative Art". Cite some examples.
+## 2. Google "Generative Art". Cite some examples.
 
 ![Chandra Michelle, 2019. *Endless Forms Most Beautiful - Generative Spirograph Prints*. https://www.michellechandra.com/generative-design-2/generative-art-spirograph-prints/](https://www.michellechandra.com/wp-content/uploads/2019/11/large_black_pincushion.jpg)
 
 ![Manolo Gamboa Naon, https://aiartists.org/generative-art-design](https://images.squarespace-cdn.com/content/v1/5c77350965a707ed1710a1bc/1592324984483-YGAI488E2HV60HX424FZ/Generative+Art+by+Manolo+Gamboa+Naon.jpeg?format=2500w)
 
----
+------------------------------------------------------------------------
 
-3. Fall
-- Objective: Create Graphics with R
-```{r}
+## 3. Fall
+
+-   Objective: Create Graphics with R
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Load tidyverse without showing messages and warnings
 library(gsubfn)
 library(tidyverse)
-```{r}
 # Define parameters for L-system
 axiom = "X"
 rules = list("X" = "F-[[X]+X]+F[+FX]-X", "F" = "FF")
@@ -168,13 +163,12 @@ ggplot() +
                data = na.omit(points)) +  # Remove any incomplete points
   coord_fixed(ratio = 1) +  # Keep the aspect ratio
   theme_void()  # Remove background and axes
- 
-
-
 ```
----
 
-4. Chart Critique
+------------------------------------------------------------------------
+
+## 4. Chart Critique
+
 ![Chart](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/354bfb83-1d1c-424f-a3c9-aa91d7a2bed8/d9jn6vn-3400d285-1a27-49de-a12c-721bf829e314.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM1NGJmYjgzLTFkMWMtNDI0Zi1hM2M5LWFhOTFkN2EyYmVkOFwvZDlqbjZ2bi0zNDAwZDI4NS0xYTI3LTQ5ZGUtYTEyYy03MjFiZjgyOWUzMTQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6yulsTbPALsTOlX_FqF4PrqV9uoqZqLo6OpLzWWKt4U)
 
-^[The chart titled "What English do you Speak" presents the user's linguistic accent profile, with "American" being the predominant result at 85%, followed by accents like Canadian (78%), Australian (61%), British (55%), New Zealand (54%), and South African (45%). The horizontal bars effectively display the relative strength of each accent, making it easy to visually compare the different results. The description for the American accent adds a humorous and engaging touch, referencing regional dialects like "No'th Ca'lina" and "New Yawk," which adds a lighthearted tone to the quiz’s outcome and makes it more relatable to an American audience.However, the chart lacks detail regarding the methodology behind these results. It doesn’t explain how the percentages were calculated, leaving the reader without an understanding of what criteria were used to determine the accent breakdown. Additionally, there seems to be a strong bias towards American English, both in the dominant percentage and the tone of the accompanying text. The focus on American regional dialects, while entertaining, might make the quiz less relevant to users from non-American English-speaking backgrounds. Moreover, the detailed description is only provided for the American accent, while other accents, such as Canadian or Australian, are not given any context or explanation. Offering descriptions for the other accent results and more information about how the results were derived would provide a more comprehensive and balanced experience for users.]
+The chart titled "What English do you Speak" presents the user's linguistic accent profile, with "American" being the predominant result at 85%, followed by accents like Canadian (78%), Australian (61%), British (55%), New Zealand (54%), and South African (45%). The horizontal bars effectively display the relative strength of each accent, making it easy to visually compare the different results. The description for the American accent adds a humorous and engaging touch, referencing regional dialects like "No'th Ca'lina" and "New Yawk," which adds a lighthearted tone to the quiz’s outcome and makes it more relatable to an American audience.However, the chart lacks detail regarding the methodology behind these results. It doesn’t explain how the percentages were calculated, leaving the reader without an understanding of what criteria were used to determine the accent breakdown. Additionally, there seems to be a strong bias towards American English, both in the dominant percentage and the tone of the accompanying text. The focus on American regional dialects, while entertaining, might make the quiz less relevant to users from non-American English-speaking backgrounds. Moreover, the detailed description is only provided for the American accent, while other accents, such as Canadian or Australian, are not given any context or explanation. Offering descriptions for the other accent results and more information about how the results were derived would provide a more comprehensive and balanced experience for users.
