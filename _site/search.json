@@ -159,5 +159,19 @@
     "title": "Assignment 5",
     "section": "Scatterplot",
     "text": "Scatterplot\n\n\n                        City Fitness_Fee\n1 Houston..TX..United.States       10.14\n2  Dallas..TX..United.States        2.99\n3  Austin..TX..United.States       14.60"
+  },
+  {
+    "objectID": "sub6.html",
+    "href": "sub6.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "Here is the link to the Final Project pdf.\nLink to PDF"
+  },
+  {
+    "objectID": "sub6.html#shiny-app",
+    "href": "sub6.html#shiny-app",
+    "title": "Final Project",
+    "section": "Shiny App",
+    "text": "Shiny App\nhttps://malashiny.shinyapps.io/test-1/"
   }
 ]
