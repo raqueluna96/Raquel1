@@ -22,21 +22,17 @@ website:
             text: "Assignment 4"
           - href: sub5.qmd
             text: "Assignment 5"
-
-      - text: "Reviews"
-        menu: 
-          - href: rev1.qmd
-            text: "Edward Tufte (2016) The Future of Data Analysis Review"
-            
-      - text: "Final Projects"
-        menu:
           - href: files/EPPS6356FinalProject.pdf
             text: "Final Project PDF"
           - href: https://malashiny.shinyapps.io/test-1/
             text: "Final Project Shiny App"
       
-          
-        
+      - text: "Reviews"
+        menu: 
+          - href: rev1.qmd
+            text: "Edward Tufte (2016) The Future of Data Analysis Review"
+            
+  
     right: 
       - icon: github
         href: https://raqueluna96.github.io/Raquel1/
